@@ -1,0 +1,231 @@
+openapi: 3.0.0
+info:
+  title: Architecture API
+  description: API Backend for Alten Project
+  version: 1.0.0
+servers:
+  - url: http://localhost:5678/api/
+paths:
+  /products/seed:
+    get:
+      summary: Seed Products
+      responses:
+        '201':
+          description: Products Seeded Successfully
+        '500':
+          description: Something went wrong
+  /products:
+    get:
+      summary: Returns all products
+      responses:
+        '200':
+          description: Returns an array of all products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 1000
+                    code:
+                      type: string
+                      example: "f230fh0g3"
+                    name:
+                      type: string
+                      example: "Bamboo Watch"
+                    description:
+                      type: string
+                      example: "Product Description"
+                    price:
+                      type: integer
+                      format: int64
+                      example: "65"
+                    quantity:
+                      type: integer
+                      format: int64
+                      example: "24"
+                    inventoryStatus:
+                      type: string
+                      example: "INSTOCK"
+                    category:
+                      type: string
+                      example: "Accessories"
+                    image:
+                      type: string
+                      example: "http://localhost:5678/images/bamboo-watch.jpg.png"
+                    rating:
+                      type: integer
+                      format: int64
+                      example: "5"
+        '500':
+          description: Something went wrong
+
+    post:
+      summary: Send a new Product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                  code:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  price:
+                    type: integer
+                    format: int64
+                  quantity:
+                    type: integer
+                    format: int64
+                  inventoryStatus:
+                    type: string
+                  category:
+                    type: string
+                  image:
+                    type: string
+                  rating:
+                    type: integer
+                    format: int64
+        '500':
+          description: Something went wrong
+  /products/{id}:
+    get:
+      summary: Returns a product depending on id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of product to return
+          schema:
+            type: integer
+            format: int64
+            example: 1000
+      responses:
+        '200':
+          description: Returns a product
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 1000
+                  code:
+                    type: string
+                    example: "f230fh0g3"
+                  name:
+                    type: string
+                    example: "Bamboo Watch"
+                  description:
+                    type: string
+                    example: "Product Description"
+                  price:
+                    type: integer
+                    format: int64
+                    example: "65"
+                  quantity:
+                    type: integer
+                    format: int64
+                    example: "24"
+                  inventoryStatus:
+                    type: string
+                    example: "INSTOCK"
+                  category:
+                    type: string
+                    example: "Accessories"
+                  image:
+                    type: string
+                    example: "http://localhost:5678/images/bamboo-watch.jpg.png"
+                  rating:
+                    type: integer
+                    format: int64
+                    example: "5"
+        '500':
+          description: Something went wrong
+        '404':
+          description: Product not found
+    patch:
+      summary: Update a product depending on id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of product to be updated
+          schema:
+            type: integer
+            format: int64
+            example: 1000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: integer
+                  format: int64
+                quantity:
+                  type: integer
+                  format: int64
+                inventoryStatus:
+                  type: string
+                category:
+                  type: string
+                image:
+                  type: string
+                rating:
+                  type: integer
+                  format: int64
+      responses:
+        '200':
+          description: Product Updated Successfully
+        '500':
+          description: Something went wrong
+    delete:
+      summary: Delete a product depending on id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of product to be deleted
+          schema:
+            type: integer
+            format: int64
+            example: 1000
+      responses:
+        '204':
+          description: Product Deleted Successfully
+        '500':
+          description: Something went wrong
