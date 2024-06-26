@@ -25,9 +25,9 @@ app.use("/api/products", productsRoutes);
 
 // const __dirname = path.resolve();
 // console.log(path.dirname(__dirname));
-app.use(express.static(path.join(path.dirname(__dirname), "/front/build")));
-app.get("*", (req, res) =>
-  res.sendFile(path.join(path.dirname(__dirname), "/front/build/index.html"))
-);
+// app.use(express.static(path.join(path.dirname(__dirname), "/front/build")));
+// app.get("*", (req, res) =>
+//   res.sendFile(path.join(path.dirname(__dirname), "/front/build/index.html"))
+// );
 
 module.exports = app;
